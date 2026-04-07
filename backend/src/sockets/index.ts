@@ -10,7 +10,7 @@ const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3001";
 
 
 // ----------------------
-// 📡 EVENTS (centralized)
+// EVENTS (centralized)
 // ----------------------
 export const EVENTS = {
   MACHINE_UPDATE: "machine:update",
