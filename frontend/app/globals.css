@@ -1,28 +1,76 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #262626;
+  /* Base */
+  --background: #f4f6f8;
+  --foreground: #1f2933;
 
-  --navbar: #65baff;
-  --navbar-link: rgb(197, 115, 0);
+  /* Navbar */
+  --navbar: #0f172a; /* azul bem escuro */
+  --navbar-foreground: #e5e7eb;
+  --navbar-link: #38bdf8; /* azul claro (accent) */
+  --navbar-link-hover: #0ea5e9;
+
+  /* Cards / surfaces */
+  --card: #ffffff;
+  --card-foreground: #1f2933;
+  --border: #e5e7eb;
+
+  /* Status (ESSENCIAL pra shopfloor) */
+  --status-running: #22c55e; /* verde */
+  --status-idle: #f59e0b; /* amarelo */
+  --status-stopped: #ef4444; /* vermelho */
+  --status-maintenance: #3b82f6; /* azul */
+
+  /* Accent */
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
 }
 
 .dark {
-  --background: #262626;
-  --foreground: #ffffff;
+  /* Base */
+  --background: #0b1220;
+  --foreground: #e5e7eb;
 
-  --navbar: #003e71;
-  --navbar-link: rgb(255, 174, 0);
+  /* Navbar */
+  --navbar: #020617;
+  --navbar-foreground: #e5e7eb;
+  --navbar-link: #38bdf8;
+  --navbar-link-hover: #7dd3fc;
+
+  /* Cards */
+  --card: #111827;
+  --card-foreground: #e5e7eb;
+  --border: #1f2937;
+
+  /* Status (mais vibrante no dark) */
+  --status-running: #4ade80;
+  --status-idle: #fbbf24;
+  --status-stopped: #f87171;
+  --status-maintenance: #60a5fa;
+
+  /* Accent */
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
 }
-
-/* #262626 */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
   --color-navbar: var(--navbar);
+  --color-navbar-foreground: var(--navbar-foreground);
   --color-navbar-link: var(--navbar-link);
+
+  --color-card: var(--card);
+  --color-border: var(--border);
+
+  --color-primary: var(--primary);
+
+  --color-running: var(--status-running);
+  --color-idle: var(--status-idle);
+  --color-stopped: var(--status-stopped);
+  --color-maintenance: var(--status-maintenance);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);

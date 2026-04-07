@@ -1,7 +1,7 @@
 import Link from "next/link";
 export default function NavBar() {
   return (
-    <div className="flex justify-between items-center font-bold w-full p-2 px-12 bg-navbar text-foreground shadow">
+    <div className="flex justify-between items-center font-bold w-full p-2 px-12 bg-navbar text-navbar-foreground shadow">
       <h1>FactoryPulse</h1>
 
       <div className="flex gap-4 px-4 py-2 ">

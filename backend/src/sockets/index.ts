@@ -8,7 +8,6 @@ import { calculateMetrics } from "../services/calculate-metrics";
 const PORT = process.env.PORT || 3000;
 const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3001";
 
-
 // ----------------------
 // EVENTS (centralized)
 // ----------------------
@@ -68,9 +67,15 @@ export function initSocket(server: HttpServer): Server {
 // SIMULATION
 // ----------------------
 type MachineStatus = "running" | "idle" | "stopped";
+type MetricStatus = "pending" | "in_progress" | "done";
 
 function getRandomStatus(): MachineStatus {
   const statuses: MachineStatus[] = ["running", "idle", "stopped"];
+  return statuses[Math.floor(Math.random() * statuses.length)];
+}
+
+function getRandomMetricStatus(): MetricStatus {
+  const statuses: MetricStatus[] = ["pending", "in_progress", "done"];
   return statuses[Math.floor(Math.random() * statuses.length)];
 }
 
@@ -93,21 +98,21 @@ function startSimulation() {
       if (machine.status === "running" && machine.currentOrderId) {
         const order = orders.find((o) => o.id === machine.currentOrderId);
 
-        if (order && order.status !== "done") {
-          order.status = "in_progress";
+        if (order) {
+          order.status = getRandomMetricStatus();
+          order.produced = Math.floor(Math.random() * 5) + 1;
 
-          const producedNow = Math.floor(Math.random() * 5) + 1;
-          order.produced += producedNow;
+          if (order.status !== "done") {
+            if (order.produced >= order.quantity) {
+              order.produced = order.quantity;
+              order.status = "done";
+              machine.status = "idle";
+            }
 
-          if (order.produced >= order.quantity) {
-            order.produced = order.quantity;
-            order.status = "done";
-            machine.status = "idle";
+            hasOrderUpdate = true;
+
+            getIO().emit(EVENTS.ORDER_UPDATE, order);
           }
-
-          hasOrderUpdate = true;
-
-          getIO().emit(EVENTS.ORDER_UPDATE, order);
         }
       }
 
