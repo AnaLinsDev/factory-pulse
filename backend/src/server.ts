@@ -14,7 +14,7 @@ export const app = express();
 // CORS
 app.use(
   cors({
-    origin: `${CLIENT_URL}:${PORT}`,
+    origin: `${CLIENT_URL}`,
     methods: ["GET", "POST"],
   }),
 );
@@ -31,5 +31,5 @@ const server = http.createServer(app);
 initSocket(server);
 
 server.listen(PORT, () => {
-  console.log(`🚀 Server running on ${CLIENT_URL}:${PORT}`);
+  console.log(`🚀 Server running on ${CLIENT_URL}`);
 });
