@@ -1,8 +1,13 @@
 import { Server } from "socket.io";
 import { Server as HttpServer } from "http";
+import "dotenv/config";
 
 import { machines, orders } from "../data/mocked";
 import { calculateMetrics } from "../services/calculate-metrics";
+
+const PORT = process.env.PORT || 3000;
+const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3001";
+
 
 // ----------------------
 // 📡 EVENTS (centralized)
@@ -32,7 +37,7 @@ export function getIO(): Server {
 export function initSocket(server: HttpServer): Server {
   io = new Server(server, {
     cors: {
-      origin: "http://localhost:3001",
+      origin: `${CLIENT_URL}:${PORT}`,
       methods: ["GET", "POST"],
     },
   });
