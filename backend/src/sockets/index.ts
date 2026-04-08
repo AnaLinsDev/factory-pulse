@@ -5,8 +5,8 @@ import "dotenv/config";
 import { machines, orders } from "../data/mocked";
 import { calculateMetrics } from "../services/calculate-metrics";
 
-const PORT = process.env.PORT || 3000;
 const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3001";
+const PORT = process.env.PORT || "3000";
 
 // ----------------------
 // EVENTS (centralized)
@@ -56,7 +56,7 @@ export function initSocket(server: HttpServer): Server {
 
   // Prevent multiple intervals (important in dev with reload)
   if (!simulationStarted) {
-    startSimulation();
+    startSimulation(PORT);
     simulationStarted = true;
   }
 
@@ -79,7 +79,7 @@ function getRandomMetricStatus(): MetricStatus {
   return statuses[Math.floor(Math.random() * statuses.length)];
 }
 
-function startSimulation() {
+function startSimulation(port: string) {
   setInterval(() => {
     let hasMachineUpdate = false;
     let hasOrderUpdate = false;
@@ -124,5 +124,5 @@ function startSimulation() {
     // Always update metrics
     const metrics = calculateMetrics();
     getIO().emit(EVENTS.METRICS_UPDATE, metrics);
-  }, 3000);
+  }, Number(port));
 }

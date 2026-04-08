@@ -7,7 +7,7 @@ export default function OrderPage() {
 
   return (
     <div className="p-6 h-[calc(100vh-105px)] overflow-y-auto">
-      <div className="bg-card border border-border rounded-xl shadow-sm overflow-hidden">
+      <div className="bg-card border border-border rounded-xl shadow-sm overflow-x-auto">
         <table className="w-full text-sm">
           {/* Header */}
           <thead className="bg-gray-100 text-left">

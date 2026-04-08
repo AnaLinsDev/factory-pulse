@@ -20,9 +20,9 @@ export default function CardOrder({
   const progress = Math.floor((produced / quantity) * 100);
 
   return (
-    <div className="p-5 rounded-2xl bg-card shadow-sm hover:shadow-md transition-all duration-200 border border-white/5">
+    <div className="p-3 lg:p-5 rounded-2xl bg-card shadow-sm hover:shadow-md transition-all duration-200 border border-white/5">
       {/* Header */}
-      <div className="flex items-center justify-between mb-5">
+      <div className="flex items-center justify-between mb-3 lg:mb-5">
         <div>
           <h3 className="font-semibold text-lg">{product}</h3>
         </div>
@@ -34,7 +34,7 @@ export default function CardOrder({
       </div>
 
       {/* Progress */}
-      <div className="flex items-center justify-between text-sm mb-2">
+      <div className="flex items-center justify-between text-sm mb-0 lg:mb-2">
         <span className="opacity-70">Progress</span>
         <span className="font-medium"> {progress}%</span>
       </div>
