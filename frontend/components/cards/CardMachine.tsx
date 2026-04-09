@@ -1,8 +1,11 @@
+import Skeleton from "../Skeleton";
+
 type Props = {
   name: string;
   currentOrderId: string | undefined;
   status: "running" | "idle" | "stopped";
   updatedAt: number;
+  loading: boolean;
 };
 
 const statusStyles = {
@@ -16,11 +19,22 @@ export default function CardMachine({
   currentOrderId,
   status,
   updatedAt,
+  loading,
 }: Props) {
   const LocaleUpdatedAt = new Date(updatedAt).toLocaleString().split(", ")[1];
+  const containerClass = `p-2 lg:p-3 rounded-2xl bg-card shadow-sm hover:shadow-md transition-all duration-200 border border-white/5`;
+
+  if (loading) {
+    return (
+      <div className={containerClass}>
+        <Skeleton className="h-4 w-20 my-auto mb-1" />
+        <Skeleton className="h-6 w-16" />
+      </div>
+    );
+  }
 
   return (
-    <div className="p-2 lg:p-3 rounded-2xl bg-card shadow-sm hover:shadow-md transition-all duration-200 border border-white/5">
+    <div className={containerClass}>
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>

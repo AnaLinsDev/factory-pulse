@@ -1,3 +1,5 @@
+import Skeleton from "../Skeleton";
+
 type Props = {
   id: string;
   product: string;
@@ -5,6 +7,7 @@ type Props = {
   quantity: number;
   status: "pending" | "in_progress" | "done";
   updatedAt: number;
+  loading: boolean;
 };
 
 const statusStyles = {
@@ -20,12 +23,24 @@ export default function CardOrder({
   quantity,
   status,
   updatedAt,
+  loading,
 }: Props) {
   const LocaleUpdatedAt = new Date(updatedAt).toLocaleString().split(", ")[1];
+  const containerClass =
+    "p-2 lg:p-3 rounded-2xl bg-card border border-white/5 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col";
+
+  if (loading) {
+    return (
+      <div className={containerClass}>
+        <Skeleton className="h-4 w-20 mb-1" />
+        <Skeleton className="h-6 w-16" />
+      </div>
+    );
+  }
 
   return (
-    <div className="p-2 lg:p-3 rounded-2xl bg-card border border-white/5 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col gap-4">
-      {/* Header */}
+    <div className={`gap-4 ${containerClass}`}>
+      {/* Header */} 
       <div className="flex items-start justify-between">
         <div className="flex flex-col">
           <h3 className="font-semibold text-sm leading-tight">{product}</h3>

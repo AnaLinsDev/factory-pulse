@@ -11,9 +11,11 @@ export function useDashboard() {
   const [machines, setMachines] = useState<Machine[]>([]);
   const [orders, setOrders] = useState<Order[]>([]);
   const [metrics, setMetrics] = useState<Metrics>({});
+  const [loadingBase, setLoadingBase] = useState(true);
 
-  const [status, setStatus] = useState<"connecting" | "live" | "offline">("connecting");
-  const [isLive, setIsLive] = useState(socket.connected);
+  const [status, setStatus] = useState<"connecting" | "live" | "offline">(
+    "connecting",
+  );
 
   useEffect(() => {
     let disconnectTimeout: NodeJS.Timeout;
@@ -33,6 +35,8 @@ export function useDashboard() {
         setMetrics(metricsData);
       } catch (error) {
         console.error("Error loading dashboard data:", error);
+      } finally {
+        setLoadingBase(false);
       }
     }
 
@@ -44,14 +48,12 @@ export function useDashboard() {
 
     const handleConnect = () => {
       clearTimeout(disconnectTimeout);
-      setStatus("live")
-      setIsLive(true);
+      setStatus("live");
     };
 
     const handleDisconnect = () => {
       disconnectTimeout = setTimeout(() => {
         setStatus("offline");
-        setIsLive(false);
       }, 3000);
     };
 
@@ -89,5 +91,5 @@ export function useDashboard() {
     };
   }, []);
 
-  return { machines, orders, metrics, status };
+  return { machines, orders, metrics, status, loadingBase };
 }
