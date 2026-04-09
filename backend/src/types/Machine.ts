@@ -5,4 +5,5 @@ export interface Machine {
   name: string;
   status: MachineStatus;
   currentOrderId?: string;
+  updatedAt: number; // Date.now()
 }

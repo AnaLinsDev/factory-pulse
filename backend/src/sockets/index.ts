@@ -2,8 +2,9 @@ import { Server } from "socket.io";
 import { Server as HttpServer } from "http";
 import "dotenv/config";
 
-import { machines, orders } from "../data/mocked";
+import { machines } from "../data/mockedMachine";
 import { calculateMetrics } from "../services/calculate-metrics";
+import { orders } from "../data/mockedOrder";
 
 const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3001";
 const PORT = process.env.PORT || "3000";
@@ -46,7 +47,13 @@ export function initSocket(server: HttpServer): Server {
 
     // Send initial snapshot
     socket.emit(EVENTS.METRICS_UPDATE, calculateMetrics());
-    socket.emit(EVENTS.MACHINE_UPDATE, machines);
+    socket.emit(
+      EVENTS.MACHINE_UPDATE,
+      machines.map((m) => ({
+        ...m,
+        updatedAt: Date.now(),
+      })),
+    );
     socket.emit(EVENTS.ORDER_UPDATE, orders);
 
     socket.on("disconnect", () => {
@@ -85,6 +92,8 @@ function startSimulation(port: string) {
     let hasOrderUpdate = false;
 
     machines.forEach((machine) => {
+      machine.updatedAt = Date.now()
+
       const prevStatus = machine.status;
       const newStatus = getRandomStatus();
 
@@ -99,6 +108,7 @@ function startSimulation(port: string) {
         const order = orders.find((o) => o.id === machine.currentOrderId);
 
         if (order) {
+          order.updatedAt = Date.now()
           order.status = getRandomMetricStatus();
           order.produced = Math.floor(Math.random() * 5) + 1;
 

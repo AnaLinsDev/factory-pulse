@@ -9,8 +9,8 @@ export default function Home() {
   const { machines, orders, metrics } = useDashboard();
 
   return (
-    <div className="p-6 mb-6 lg:mb-0">
-      <div className="lg:h-[calc(100vh-120pt)] scroll-auto pr-4 ">
+    <div className="flex flex-col lg:flex-row p-6 mb-6 lg:mb-0">
+      <div className="flex-1 lg:h-[calc(100vh-120pt)] scroll-auto pr-4 ">
         <MetricComponent metrics={metrics} />
 
         <MachinesComponent machines={machines} limit={8} />

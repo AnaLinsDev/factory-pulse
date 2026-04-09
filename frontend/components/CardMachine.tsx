@@ -2,6 +2,7 @@ type Props = {
   name: string;
   currentOrderId: string | undefined;
   status: "running" | "idle" | "stopped";
+  updatedAt: number;
 };
 
 const statusStyles = {
@@ -10,13 +11,20 @@ const statusStyles = {
   stopped: "bg-stopped/10 text-stopped",
 };
 
-export default function CardMachine({ name, currentOrderId, status }: Props) {
+export default function CardMachine({
+  name,
+  currentOrderId,
+  status,
+  updatedAt,
+}: Props) {
+  const LocaleUpdatedAt = new Date(updatedAt).toLocaleString().split(", ")[1];
+
   return (
-    <div className="p-3 lg:p-5 rounded-2xl bg-card shadow-sm hover:shadow-md transition-all duration-200 border border-white/5">
+    <div className="p-2 lg:p-3 rounded-2xl bg-card shadow-sm hover:shadow-md transition-all duration-200 border border-white/5">
       {/* Header */}
-      <div className="flex items-center justify-between mb-2 lg:mb-5">
+      <div className="flex items-center justify-between">
         <div>
-          <h3 className="font-semibold text-lg">{name}</h3>
+          <h3 className="font-semibold text-sm">{name}</h3>
         </div>
         <span
           className={`text-xs px-2 py-1 rounded-full font-medium capitalize ${statusStyles[status]}`}
@@ -25,7 +33,12 @@ export default function CardMachine({ name, currentOrderId, status }: Props) {
         </span>
       </div>
 
-      <p>Order: {currentOrderId || "---"}</p>
+      <div className="flex justify-between text-xs opacity-60 my-1 lg:my-2">
+        <p>Order: {currentOrderId ? `#${currentOrderId}` : "---"}</p>
+        <div>
+          {LocaleUpdatedAt ? `Updated ${LocaleUpdatedAt}` : "No updates yet"}
+        </div>
+      </div>
     </div>
   );
 }

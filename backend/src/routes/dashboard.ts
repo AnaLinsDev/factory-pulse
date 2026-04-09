@@ -1,7 +1,9 @@
 import { Router } from "express";
 
-import { machines, orders } from "../data/mocked";
+import { machines } from "../data/mockedMachine";
 import { calculateMetrics } from "../services/calculate-metrics";
+import { orders } from "../data/mockedOrder";
+import { machineStatusHistory, orderProductionHistory } from "../data/mockedHistory";
 
 const router = Router();
 

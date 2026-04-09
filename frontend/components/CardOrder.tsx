@@ -1,8 +1,10 @@
 type Props = {
+  id: string;
   product: string;
   produced: number;
   quantity: number;
   status: "pending" | "in_progress" | "done";
+  updatedAt: number;
 };
 
 const statusStyles = {
@@ -12,39 +14,37 @@ const statusStyles = {
 };
 
 export default function CardOrder({
+  id,
   product,
   produced,
   quantity,
   status,
+  updatedAt,
 }: Props) {
-  const progress = Math.floor((produced / quantity) * 100);
+  const LocaleUpdatedAt = new Date(updatedAt).toLocaleString().split(", ")[1];
 
   return (
-    <div className="p-3 lg:p-5 rounded-2xl bg-card shadow-sm hover:shadow-md transition-all duration-200 border border-white/5">
+    <div className="p-2 lg:p-3 rounded-2xl bg-card border border-white/5 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col gap-4">
       {/* Header */}
-      <div className="flex items-center justify-between mb-3 lg:mb-5">
-        <div>
-          <h3 className="font-semibold text-lg">{product}</h3>
+      <div className="flex items-start justify-between">
+        <div className="flex flex-col">
+          <h3 className="font-semibold text-sm leading-tight">{product}</h3>
+          <span className="text-xs opacity-60">Order #{id}</span>
         </div>
+
         <span
           className={`text-xs px-2 py-1 rounded-full font-medium capitalize ${statusStyles[status]}`}
         >
-          {status}
+          {status.replace("_", " ")}
         </span>
       </div>
 
-      {/* Progress */}
-      <div className="flex items-center justify-between text-sm mb-0 lg:mb-2">
-        <span className="opacity-70">Progress</span>
-        <span className="font-medium"> {progress}%</span>
-      </div>
-
-      {/* Progress bar */}
-      <div className="w-full h-2 dark:bg-gray-200 rounded-full overflow-hidden">
-        <div
-          className="h-full bg-blue-500 transition-all duration-500"
-          style={{ width: `${progress}%` }}
-        />
+      {/* Timestamp */}
+      <div className="flex justify-between text-xs opacity-60">
+        <p>{`${produced}/${quantity}`}</p>
+        <div>
+          {LocaleUpdatedAt ? `Updated ${LocaleUpdatedAt}` : "No updates yet"}
+        </div>
       </div>
     </div>
   );

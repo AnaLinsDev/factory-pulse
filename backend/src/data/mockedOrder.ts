@@ -1,16 +1,6 @@
-import { Machine } from "../types/Machine";
 import { Order } from "../types/Order";
 
-export const machines: Machine[] = [
-  { id: "M1", name: "Cutter", status: "running", currentOrderId: "O1" },
-  { id: "M2", name: "Assembler", status: "idle" },
-  { id: "M3", name: "Painter", status: "stopped" },
-  { id: "M4", name: "Welder", status: "running", currentOrderId: "O3" },
-  { id: "M5", name: "Driller", status: "idle" },
-  { id: "M6", name: "Polisher", status: "running", currentOrderId: "O4" },
-  { id: "M7", name: "Inspector", status: "idle" },
-  { id: "M8", name: "Packager", status: "running", currentOrderId: "O5" },
-];
+const now = Date.now();
 
 export const orders: Order[] = [
   {
@@ -20,6 +10,7 @@ export const orders: Order[] = [
     produced: 40,
     machineId: "M1",
     status: "in_progress",
+    updatedAt: now - 2000,
   },
   {
     id: "O2",
@@ -28,6 +19,7 @@ export const orders: Order[] = [
     produced: 200,
     machineId: "M3",
     status: "done",
+    updatedAt: now - 15000,
   },
   {
     id: "O3",
@@ -36,6 +28,7 @@ export const orders: Order[] = [
     produced: 60,
     machineId: "M4",
     status: "in_progress",
+    updatedAt: now - 3000,
   },
   {
     id: "O4",
@@ -44,6 +37,7 @@ export const orders: Order[] = [
     produced: 120,
     machineId: "M6",
     status: "in_progress",
+    updatedAt: now - 5000,
   },
   {
     id: "O5",
@@ -52,6 +46,7 @@ export const orders: Order[] = [
     produced: 20,
     machineId: "M8",
     status: "in_progress",
+    updatedAt: now - 1000,
   },
   {
     id: "O6",
@@ -60,6 +55,7 @@ export const orders: Order[] = [
     produced: 0,
     machineId: "M2",
     status: "pending",
+    updatedAt: now - 20000,
   },
   {
     id: "O7",
@@ -68,5 +64,6 @@ export const orders: Order[] = [
     produced: 120,
     machineId: "M5",
     status: "done",
+    updatedAt: now - 10000,
   },
 ];

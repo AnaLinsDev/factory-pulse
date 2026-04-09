@@ -1,4 +1,5 @@
-import { machines, orders } from "../data/mocked";
+import { machines } from "../data/mockedMachine";
+import { orders } from "../data/mockedOrder";
 import { Metrics } from "../types/Metrics";
 
 export function calculateMetrics(): Metrics {
