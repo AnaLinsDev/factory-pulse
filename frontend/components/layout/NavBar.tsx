@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { MdMenu } from "react-icons/md";
 import Image from "next/image";
+import LiveInfo from "./LiveInfo";
 
 export default function NavBar() {
   const [showMenu, setShowMenu] = useState(false);
@@ -52,6 +53,7 @@ export default function NavBar() {
             className="object-contain"
           />
           FactoryPulse
+          <LiveInfo />
         </h1>
 
         <div className="flex flex-col lg:flex-row items-left gap-2 lg:gap-6 w-full lg:w-auto">

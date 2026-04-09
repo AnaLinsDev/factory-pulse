@@ -12,52 +12,82 @@ export function useDashboard() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [metrics, setMetrics] = useState<Metrics>({});
 
+  const [status, setStatus] = useState<"connecting" | "live" | "offline">("connecting");
+  const [isLive, setIsLive] = useState(socket.connected);
+
   useEffect(() => {
-    // Function to load all initial data from the backend
+    let disconnectTimeout: NodeJS.Timeout;
+
     async function load() {
       try {
-        // Call all APIs at the same time (faster than calling one by one)
+        // Get the base data
         const [machinesData, ordersData, metricsData] = await Promise.all([
-          getMachines(), // fetch list of machines
-          getOrders(), // fetch list of orders
-          getMetrics(), // fetch dashboard metrics
+          getMachines(),
+          getOrders(),
+          getMetrics(),
         ]);
 
-        // Save data
+        //Set the base data
         setMachines(machinesData);
         setOrders(ordersData);
         setMetrics(metricsData);
       } catch (error) {
-        // If any request fails, log the error
         console.error("Error loading dashboard data:", error);
       }
     }
 
     load();
 
-    socket.connect();
+    if (!socket.connected) {
+      socket.connect();
+    }
 
-    socket.on("machine:update", (machine) => {
-      // Set the machines with the data from the received machine
+    const handleConnect = () => {
+      clearTimeout(disconnectTimeout);
+      setStatus("live")
+      setIsLive(true);
+    };
+
+    const handleDisconnect = () => {
+      disconnectTimeout = setTimeout(() => {
+        setStatus("offline");
+        setIsLive(false);
+      }, 3000);
+    };
+
+    const handleMachineUpdate = (machine: Machine) => {
       setMachines((prev) =>
         prev.map((m) => (m.id === machine.id ? machine : m)),
       );
-    });
+    };
 
-    socket.on("order:update", (order) => {
-      // Set the orders with the data from the received order
+    const handleOrderUpdate = (order: Order) => {
       setOrders((prev) => prev.map((o) => (o.id === order.id ? order : o)));
-    });
+    };
 
-    socket.on("metrics:update", (data) => {
-      // Set the metrics with the received metric
+    const handleMetricsUpdate = (data: Metrics) => {
       setMetrics(data);
-    });
+    };
+
+    // Add Events
+    socket.on("connect", handleConnect);
+    socket.on("disconnect", handleDisconnect);
+    socket.on("machine:update", handleMachineUpdate);
+    socket.on("order:update", handleOrderUpdate);
+    socket.on("metrics:update", handleMetricsUpdate);
 
     return () => {
-      socket.disconnect();
+      //Remove events
+
+      clearTimeout(disconnectTimeout);
+
+      socket.off("connect", handleConnect);
+      socket.off("disconnect", handleDisconnect);
+      socket.off("machine:update", handleMachineUpdate);
+      socket.off("order:update", handleOrderUpdate);
+      socket.off("metrics:update", handleMetricsUpdate);
     };
   }, []);
 
-  return { machines, orders, metrics };
+  return { machines, orders, metrics, status };
 }
