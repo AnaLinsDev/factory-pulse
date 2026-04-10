@@ -1,13 +1,34 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdMenu } from "react-icons/md";
 import Image from "next/image";
 import LiveInfo from "./LiveInfo";
+import { usePathname } from "next/navigation";
+
+function NavItem({ href, label }: { href: string; label: string }) {
+  const pathname = usePathname();
+
+  const isActive = href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+  return (
+    <Link
+      href={href}
+      className={`w-full lg:w-auto p-2 rounded transition ${
+        isActive ? "text-navbar-link font-semibold" : "hover:text-navbar-link"
+      }`}
+    >
+      {label}
+    </Link>
+  );
+}
 
 export default function NavBar() {
   const [showMenu, setShowMenu] = useState(false);
+
+  // Handle initial navigation
+  useEffect(() => {}, []);
 
   function showMenuMobile() {
     setShowMenu(!showMenu);
@@ -58,26 +79,9 @@ export default function NavBar() {
         </h1>
 
         <div className="flex flex-col lg:flex-row items-left gap-2 lg:gap-6 w-full lg:w-auto">
-          <Link
-            href="/"
-            className="w-full lg:w-auto p-2 rounded hover:text-navbar-link transition"
-          >
-            Dashboard
-          </Link>
-
-          <Link
-            href="/machines"
-            className="w-full lg:w-auto p-2 rounded hover:text-navbar-link transition"
-          >
-            Machines
-          </Link>
-
-          <Link
-            href="/orders"
-            className="w-full lg:w-auto p-2 rounded hover:text-navbar-link transition"
-          >
-            Orders
-          </Link>
+          <NavItem href="/" label="Dashboard" />
+          <NavItem href="/machines" label="Machines" />
+          <NavItem href="/orders" label="Orders" />
         </div>
       </div>
     </div>
