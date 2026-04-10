@@ -27,6 +27,7 @@ export default function NavBar() {
             className="object-contain"
           />{" "}
           FactoryPulse
+          <LiveInfo />
         </h1>
 
         <MdMenu

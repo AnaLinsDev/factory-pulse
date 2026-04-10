@@ -5,6 +5,8 @@ import "dotenv/config";
 import { machines } from "../data/mockedMachine";
 import { calculateMetrics } from "../services/calculate-metrics";
 import { orders } from "../data/mockedOrder";
+import { MachineStatus } from "../types/Machine";
+import { MetricStatus } from "../types/Order";
 
 const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3001";
 const PORT = process.env.PORT || "3000";
@@ -73,9 +75,6 @@ export function initSocket(server: HttpServer): Server {
 // ----------------------
 // SIMULATION
 // ----------------------
-type MachineStatus = "running" | "idle" | "stopped";
-type MetricStatus = "pending" | "in_progress" | "done";
-
 function getRandomStatus(): MachineStatus {
   const statuses: MachineStatus[] = ["running", "idle", "stopped"];
   return statuses[Math.floor(Math.random() * statuses.length)];

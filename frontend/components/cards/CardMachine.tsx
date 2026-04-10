@@ -1,9 +1,10 @@
+import { MachineStatus } from "@/types/Machine";
 import Skeleton from "../Skeleton";
 
 type Props = {
   name: string;
   currentOrderId: string | undefined;
-  status: "running" | "idle" | "stopped";
+  status: MachineStatus;
   updatedAt: number;
   loading: boolean;
 };
@@ -49,7 +50,7 @@ export default function CardMachine({
 
       <div className="flex justify-between text-xs opacity-60 my-1 lg:my-2">
         <p>Order: {currentOrderId ? `#${currentOrderId}` : "---"}</p>
-        <div>
+        <div className="ml-8">
           {LocaleUpdatedAt ? `Updated ${LocaleUpdatedAt}` : "No updates yet"}
         </div>
       </div>

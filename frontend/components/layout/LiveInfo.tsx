@@ -4,10 +4,10 @@ export default function LiveInfo() {
   const { status } = useDashboard();
 
   return (
-    <div className="flex items-center gap-2 my-auto bg-background px-4 py-2 rounded-2xl">
+    <div className="flex items-center gap-2 ml-8 my-auto bg-background px-2 py-1 lg:px-4 lg:py-2 rounded-2xl">
       <span
         className={`
-                w-3 h-3 rounded-full
+                w-2 h-2 lg:w-3 lg:h-3 rounded-full
                 ${
                   status === "live"
                     ? "bg-green-500 animate-pulse"
@@ -20,7 +20,7 @@ export default function LiveInfo() {
 
       <span
         className={`
-                text-sm font-semibold
+                text-xs lg:text-sm font-semibold
                 ${
                   status === "live"
                     ? "text-green-600"

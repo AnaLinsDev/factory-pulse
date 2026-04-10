@@ -8,7 +8,7 @@ type Props = {
 
 export default function MetricComponent({ metrics, loading }: Props) {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
       <CardMetric
         title="Total Machines"
         value={metrics?.totalMachines}

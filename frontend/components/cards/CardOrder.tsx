@@ -1,3 +1,4 @@
+import { MetricStatus } from "@/types/Order";
 import Skeleton from "../Skeleton";
 
 type Props = {
@@ -5,7 +6,7 @@ type Props = {
   product: string;
   produced: number;
   quantity: number;
-  status: "pending" | "in_progress" | "done";
+  status: MetricStatus;
   updatedAt: number;
   loading: boolean;
 };
@@ -40,7 +41,7 @@ export default function CardOrder({
 
   return (
     <div className={`gap-4 ${containerClass}`}>
-      {/* Header */} 
+      {/* Header */}
       <div className="flex items-start justify-between">
         <div className="flex flex-col">
           <h3 className="font-semibold text-sm leading-tight">{product}</h3>
@@ -57,7 +58,7 @@ export default function CardOrder({
       {/* Timestamp */}
       <div className="flex justify-between text-xs opacity-60">
         <p>{`${produced}/${quantity}`}</p>
-        <div>
+        <div className="ml-8">
           {LocaleUpdatedAt ? `Updated ${LocaleUpdatedAt}` : "No updates yet"}
         </div>
       </div>
