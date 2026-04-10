@@ -7,7 +7,7 @@ type Props = {
   loading: boolean;
 };
 
-export default function MachinesComponent({
+export default function MachinesDashboard({
   machines,
   loading,
   limit = 8,

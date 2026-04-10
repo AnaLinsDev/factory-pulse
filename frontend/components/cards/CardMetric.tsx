@@ -13,24 +13,16 @@ export default function CardMetric({
   className = "",
   loading,
 }: Props) {
-  const containerClass =
-    `lg:p-4 lg:block p-2 flex justify-around rounded-xl bg-card shadow-sm ${className}`;
+  const containerClass = `lg:p-3 lg:block p-2 flex justify-around rounded-xl bg-card shadow-sm ${className}`;
 
   if (loading) {
-    return (
-      <div className={containerClass}>
-        <Skeleton className="h-4 w-20 mb-1" />
-        <Skeleton className="h-6 w-16" />
-      </div>
-    );
+    return <Skeleton className={containerClass} />;
   }
 
   return (
     <div className={containerClass}>
       <p className="my-auto text-sm opacity-70">{title}</p>
-      <h2 className="text-lg lg:text-2xl font-bold">
-        {value ?? "--"}
-      </h2>
+      <h2 className="text-lg lg:text-2xl font-bold">{value ?? "--"}</h2>
     </div>
   );
 }

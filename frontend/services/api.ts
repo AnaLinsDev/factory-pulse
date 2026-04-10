@@ -16,13 +16,3 @@ export async function getMetrics() {
   const res = await fetch(`${prefix}/metrics`);
   return res.json();
 }
-
-export async function getMachineHistory(machineId: string) {
-  const res = await fetch(`${prefix}/machines/${machineId}/history`);
-  return res.json();
-}
-
-export async function getOrderHistory(orderId: string) {
-  const res = await fetch(`${prefix}/orders/${orderId}/history`);
-  return res.json();
-}

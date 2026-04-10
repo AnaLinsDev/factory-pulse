@@ -7,7 +7,7 @@ type Props = {
   loading: boolean
 };
 
-export default function OrdersComponent({ orders, loading, limit = 8 }: Props) {
+export default function OrdersDashboard({ orders, loading, limit = 8 }: Props) {
   return (
     <div className="my-8">
       <h2 className="text-xl font-semibold mb-2">Orders</h2>

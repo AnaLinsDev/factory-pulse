@@ -26,17 +26,11 @@ export default function CardMachine({
   const containerClass = `p-2 lg:p-3 rounded-2xl bg-card shadow-sm hover:shadow-md transition-all duration-200 border border-white/5`;
 
   if (loading) {
-    return (
-      <div className={containerClass}>
-        <Skeleton className="h-4 w-20 my-auto mb-1" />
-        <Skeleton className="h-6 w-16" />
-      </div>
-    );
+    return <Skeleton className={containerClass} />;
   }
 
   return (
     <div className={containerClass}>
-      {/* Header */}
       <div className="flex items-center justify-between">
         <div>
           <h3 className="font-semibold text-sm">{name}</h3>
@@ -49,9 +43,9 @@ export default function CardMachine({
       </div>
 
       <div className="flex justify-between text-xs opacity-60 my-1 lg:my-2">
-        <p>Order: {currentOrderId ? `#${currentOrderId}` : "---"}</p>
+        <p>{currentOrderId ? `Order #${currentOrderId}` : ""}</p>
         <div className="ml-8">
-          {LocaleUpdatedAt ? `Updated ${LocaleUpdatedAt}` : "No updates yet"}
+          {LocaleUpdatedAt ? `Updated ${LocaleUpdatedAt}` : "No updates"}
         </div>
       </div>
     </div>

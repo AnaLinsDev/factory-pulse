@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MdMenu } from "react-icons/md";
 import Image from "next/image";
 import LiveInfo from "./LiveInfo";
@@ -24,61 +24,64 @@ function NavItem({ href, label }: { href: string; label: string }) {
   );
 }
 
+function NavTitle({ size }: { size: number }) {
+  return (
+    <Link href="/" className="flex items-center gap-2 text-lg font-bold">
+      <Image
+        src="/logo.png"
+        alt="FactoryPulse logo"
+        width={size}
+        height={size}
+        className="object-contain"
+      />
+      FactoryPulse
+    </Link>
+  );
+}
 export default function NavBar() {
   const [showMenu, setShowMenu] = useState(false);
 
-  // Handle initial navigation
-  useEffect(() => {}, []);
-
-  function showMenuMobile() {
-    setShowMenu(!showMenu);
+  function toggleMenu() {
+    setShowMenu((prev) => !prev);
   }
 
   return (
     <div className="bg-navbar text-navbar-foreground">
-      {/* Botão menu */}
-      <div className="p-2 lg:hidden flex flex-row justify-between">
-        <h1 className="flex items-center gap-2 text-lg font-bold my-auto">
-          {" "}
-          <Image
-            src="/logo.png"
-            alt="FactoryPulse logo"
-            width={26}
-            height={26}
-            className="object-contain"
-          />{" "}
-          FactoryPulse
-          <LiveInfo />
-        </h1>
+      {/* MOBILE */}
+      <div className="p-2 lg:hidden flex justify-between items-center">
+        <NavTitle size={26} />
 
         <MdMenu
-          className=" text-white text-4xl cursor-pointer transition-transform duration-300 hover:scale-110"
-          onClick={showMenuMobile}
+          className="text-white text-4xl cursor-pointer transition-transform duration-300 hover:scale-110"
+          onClick={toggleMenu}
         />
       </div>
 
       {/* Menu */}
       <div
         className={`
-          flex flex-col lg:flex-row lg:py-3 justify-between items-left w-full px-4 lg:px-12 py-1 shadow
+          flex flex-col lg:flex-row lg:items-center justify-between w-full px-4 lg:px-12 py-1 lg:py-3 shadow
           transform transition-all duration-300 ease-in-out
-          ${showMenu ? "opacity-100 translate-y-0 max-h-96" : "opacity-0 -translate-y-4 max-h-0 overflow-hidden"}
+          ${
+            showMenu
+              ? "opacity-100 translate-y-0 max-h-96"
+              : "opacity-0 -translate-y-4 max-h-0 overflow-hidden"
+          }
           lg:opacity-100 lg:translate-y-0 lg:max-h-full
         `}
       >
-        <h1 className="hidden lg:flex items-center gap-2 text-lg font-bold my-auto">
-          <Image
-            src="/logo.png"
-            alt="FactoryPulse logo"
-            width={26}
-            height={26}
-            className="object-contain"
-          />
-          FactoryPulse
-          <LiveInfo />
-        </h1>
+        {/* Left */}
+        <div className="flex items-center gap-4">
+          <div className="hidden lg:flex">
+            <NavTitle size={26} />
+          </div>
 
-        <div className="flex flex-col lg:flex-row items-left gap-2 lg:gap-6 w-full lg:w-auto">
+        {/* Server live chip */}
+          <LiveInfo />
+        </div>
+
+        {/* Links */}
+        <div className="flex flex-col lg:flex-row gap-2 lg:gap-6 w-full lg:w-auto">
           <NavItem href="/" label="Dashboard" />
           <NavItem href="/machines" label="Machines" />
           <NavItem href="/orders" label="Orders" />

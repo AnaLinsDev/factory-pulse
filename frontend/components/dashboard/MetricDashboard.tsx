@@ -6,7 +6,7 @@ type Props = {
   loading: boolean;
 };
 
-export default function MetricComponent({ metrics, loading }: Props) {
+export default function MetricDashboard({ metrics, loading }: Props) {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
       <CardMetric

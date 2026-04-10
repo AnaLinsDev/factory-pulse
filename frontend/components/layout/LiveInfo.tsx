@@ -4,7 +4,7 @@ export default function LiveInfo() {
   const { status } = useDashboard();
 
   return (
-    <div className="flex items-center gap-2 ml-8 my-auto bg-background px-2 py-1 lg:px-4 lg:py-2 rounded-2xl">
+    <div className="flex items-center gap-2 my-auto bg-background px-2 py-1 mb-5 lg:mb-0 lg:px-4 lg:py-2 rounded-2xl">
       <span
         className={`
                 w-2 h-2 lg:w-3 lg:h-3 rounded-full
