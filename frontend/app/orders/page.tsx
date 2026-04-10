@@ -3,6 +3,7 @@
 import Table, { Column } from "@/components/details/Table";
 import { useDashboard } from "@/hooks/useDashboard";
 import { Order } from "@/types/Order";
+import { toTitleCase } from "@/utils/titleFormat";
 
 export default function OrderPage() {
   const { orders } = useDashboard();
@@ -54,7 +55,7 @@ export default function OrderPage() {
                 : "bg-maintenance/20 text-maintenance"
           }`}
         >
-          {o.status}
+          {toTitleCase(o.status)}
         </span>
       ),
     },

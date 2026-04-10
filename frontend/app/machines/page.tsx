@@ -3,6 +3,7 @@
 import Table, { Column } from "@/components/details/Table";
 import { useDashboard } from "@/hooks/useDashboard";
 import { Machine } from "@/types/Machine";
+import { toTitleCase } from "@/utils/titleFormat";
 
 export default function MachinesPage() {
   const { machines } = useDashboard();
@@ -24,7 +25,7 @@ export default function MachinesPage() {
                 : "bg-stopped/20 text-stopped"
           }`}
         >
-          {m.status}
+          {toTitleCase(m.status)}
         </span>
       ),
     },
