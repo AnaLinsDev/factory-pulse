@@ -1,7 +1,7 @@
 import { Machine } from "@/types/Machine";
 import CardMachine from "../cards/CardMachine";
 
-type Props = {
+export type MachinesProps = {
   machines: Machine[];
   limit: number;
   loading: boolean;
@@ -11,7 +11,7 @@ export default function MachinesDashboard({
   machines,
   loading,
   limit = 8,
-}: Props) {
+}: MachinesProps) {
   return (
     <div className="my-8">
       <h2 className="text-xl font-semibold mb-2">Machines</h2>

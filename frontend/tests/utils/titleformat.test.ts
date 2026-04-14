@@ -1,3 +1,4 @@
+import { describe, it, expect } from "vitest";
 import { toTitleCase } from "@/utils/titleFormat";
 
 describe("toTitleCase", () => {

@@ -1,13 +1,13 @@
 import { Order } from "@/types/Order";
 import CardOrder from "../cards/CardOrder";
 
-type Props = {
+export type OrdersProps = {
   orders: Order[];
   limit: number;
   loading: boolean
 };
 
-export default function OrdersDashboard({ orders, loading, limit = 8 }: Props) {
+export default function OrdersDashboard({ orders, loading, limit = 8 }: OrdersProps) {
   return (
     <div className="my-8">
       <h2 className="text-xl font-semibold mb-2">Orders</h2>

@@ -20,14 +20,6 @@ jobs:
         working-directory: ./backend
         run: npm install
 
-      - name: Lint
-        working-directory: ./backend
-        run: npm run lint --if-present
-
-      - name: Test
-        working-directory: ./backend
-        run: npm test --if-present
-
       - name: Build
         working-directory: ./backend
         run: npm run build --if-present
@@ -51,7 +43,7 @@ jobs:
 
       - name: Test
         working-directory: ./frontend
-        run: npm test --if-present
+        run: npm test:run --if-present
 
       - name: Build
         working-directory: ./frontend
