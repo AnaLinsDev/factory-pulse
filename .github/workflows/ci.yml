@@ -43,7 +43,7 @@ jobs:
 
       - name: Test
         working-directory: ./frontend
-        run: npm test:run --if-present
+        run: npm run test:run --if-present
 
       - name: Build
         working-directory: ./frontend
