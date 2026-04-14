@@ -22,7 +22,7 @@ This project focuses on mimicking real-time data flow and frontend visualization
 - socket.io-client
 ---
 
-🚀 How to run the project
+🚀 How to run the project in your machine
 ```
 cd clone https://github.com/AnaLinsDev/factory-pulse.git
 cd factory-pulse
@@ -31,6 +31,9 @@ BACKEND - First cmd
 ```
 cd backend
 npm install
+
+ -> Add the .env with the PORT and CLIENT_URL
+
 npm run dev
 ```
 
@@ -38,6 +41,9 @@ FRONTEND  - Second cmd
 ```
 cd frontend
 npm install
+
+ -> Add the .env.local with the NEXT_PUBLIC_API_URL
+
 npm run dev
 ```
 ---
