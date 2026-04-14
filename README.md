@@ -53,3 +53,6 @@ npm run dev
 - Control simulation (pause/resume)
 - Historical data charts
 - Authentication layer
+
+Video
+<video src="https://github.com/user-attachments/assets/46a099d8-df2d-4072-95e7-13f966a8826c" width="300" controls></video>
