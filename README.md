@@ -47,7 +47,7 @@ npm install
 npm run dev
 ```
 ---
-# 🚀 How did I built it
+## 🚀 How did I built it
 
 ### Backend
 
