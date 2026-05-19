@@ -1,7 +1,7 @@
 "use client";
 
 import Table, { Column } from "@/components/details/Table";
-import { useDashboard } from "@/hooks/useDashboard";
+import { useDashboard } from "@/contexts/DashboardContext";
 import { Order } from "@/types/Order";
 import { toTitleCase } from "@/utils/titleFormat";
 
@@ -34,7 +34,7 @@ export default function OrderPage() {
           <div className="w-40">
             <div className="w-full bg-gray-200 rounded-full h-2">
               <div
-                className="h-2 rounded-full bg-primary"
+                className="h-2 rounded-full bg-navbar"
                 style={{ width: `${progress}%` }}
               />
             </div>

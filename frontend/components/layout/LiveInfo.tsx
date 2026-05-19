@@ -1,4 +1,4 @@
-import { useDashboard } from "@/hooks/useDashboard";
+import { useDashboard } from "@/contexts/DashboardContext";
 
 export default function LiveInfo() {
   const { status } = useDashboard();

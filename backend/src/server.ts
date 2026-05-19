@@ -6,8 +6,8 @@ import "dotenv/config";
 import dashboardRoutes from "./routes/dashboard";
 import { initSocket } from "./sockets";
 
-const PORT = process.env.PORT || 3000;
-const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3001";
+const PORT = process.env.PORT;
+const CLIENT_URL = process.env.CLIENT_URL;
 
 export const app = express();
 

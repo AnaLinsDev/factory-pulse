@@ -1,9 +1,9 @@
 "use client";
 
-import { useDashboard } from "@/hooks/useDashboard";
 import MetricDashboard from "@/components/dashboard/MetricDashboard";
 import OrdersDashboard from "@/components/dashboard/OrdersDashboard";
 import MachinesDashboard from "@/components/dashboard/MachinesDashboard";
+import { useDashboard } from "@/contexts/DashboardContext";
 
 export default function Home() {
   const { machines, orders, metrics, loadingBase } = useDashboard();

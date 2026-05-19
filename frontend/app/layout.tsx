@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+import { DashboardProvider } from "@/contexts/DashboardContext";
+
 import NavBar from "../components/layout/NavBar";
 
 const geistSans = Geist({
@@ -29,13 +31,13 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="h-full flex flex-col">
-        <NavBar />
+      <DashboardProvider>
+        <body className="h-full flex flex-col">
+          <NavBar />
 
-        <main className="flex-1 mx-auto w-full">
-          {children}
-        </main>
-      </body>
+          <main className="flex-1 mx-auto w-full">{children}</main>
+        </body>
+      </DashboardProvider>
     </html>
   );
 }

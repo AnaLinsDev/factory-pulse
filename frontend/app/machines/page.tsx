@@ -1,7 +1,7 @@
 "use client";
 
 import Table, { Column } from "@/components/details/Table";
-import { useDashboard } from "@/hooks/useDashboard";
+import { useDashboard } from "@/contexts/DashboardContext";
 import { Machine } from "@/types/Machine";
 import { toTitleCase } from "@/utils/titleFormat";
 
